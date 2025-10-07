@@ -12,7 +12,7 @@ function App() {
           <Routes>
             {/* Define you routes here */}
             <Route path="/" element={<h1> Home page</h1>}/>
-            <Route path="/profile/:id" element={<h1>Profile page</h1>}/>
+            <Route path="/profile/:id" element={<h1>profile page</h1>}/>
             <Route path="/movies" element={<h1>Movies page</h1>}/>
             {/* Add more routes as needed */}
           </Routes>
