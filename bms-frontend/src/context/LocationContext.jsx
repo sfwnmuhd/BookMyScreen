@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const LocationContext = createContext()
 
-export const LocationProvid = ({children}) => {
+export const LocationProvide = ({children}) => {
 
     const[location, setLocation] = useState(null);
     const[loading, setLoading] = useState(true);
@@ -11,6 +11,20 @@ export const LocationProvid = ({children}) => {
     useEffect(()=>{
 
 
+        const fetchLocationData = async (latitude, longitude) => {
+            try {
+                const res = await fetch(
+                    ` https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+                )
+                const data = await res.json();
+                const userLocation = data?.address?.state;
+                setLocation(userLocation);
+            } catch (error) {
+                setError("Failed to fetch location data");
+            }finally{
+                setLoading(false);
+            }
+        }
         // Logic to fetch and set location
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -29,3 +43,5 @@ export const LocationProvid = ({children}) => {
         </LocationContext.Provider>
     )
 }
+
+export const useLocation = () => useContext(LocationContext);
