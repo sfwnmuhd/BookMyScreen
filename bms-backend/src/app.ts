@@ -13,6 +13,8 @@ app.use(
     origin: ["http://localhost:5173"],
   })
 );
+
+// middlewares
 app.use(cookieParser());
 app.use(express.json());
 
